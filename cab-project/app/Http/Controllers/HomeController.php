@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -32,6 +32,12 @@ class HomeController extends Controller
     }
     public function storeUser()
     {
-        return request() ->all();
+        $user= new User;
+        $user->name = request('full_name');
+        $user->email = request('email');
+        $user->password = request('password');
+        $user->save();
+        
+        return redirect('login');
     }
 }
